@@ -3,7 +3,7 @@
 /*==============================================================*/
 create table TGoodsInfo
 (
-   ID                   integer not null,
+   ID                   integer not null AUTO_INCREMENT,
    NAME                 varchar(256) not null,
    CODE                 varchar(256) not null,
    COMPANY              varchar(256) not null,
@@ -26,7 +26,7 @@ create index goods_id_index on TGoodsInfo
 /*==============================================================*/
 create table TInboundRecord
 (
-   ID                   integer not null,
+   ID                   integer not null AUTO_INCREMENT,
    GOODS_ID             integer not null,
    PRICE                integer not null,
    COUNT                integer not null,
@@ -49,7 +49,7 @@ create index in_id_index on TInboundRecord
 /*==============================================================*/
 create table TOutboundRecord
 (
-   ID                   integer not null,
+   ID                   integer not null AUTO_INCREMENT,
    GOODS_ID             integer not null,
    PRICE                integer not null,
    COUNT                integer not null,
@@ -72,7 +72,7 @@ create index out_id_index on TOutboundRecord
 /*==============================================================*/
 create table TShopInfo
 (
-   ID                   integer not null,
+   ID                   integer not null AUTO_INCREMENT,
    NAME                 varchar(256),
    MOBILE               varchar(25),
    CREATE_TIME          timestamp not null,
@@ -93,7 +93,7 @@ create index shop_id_index on TShopInfo
 /*==============================================================*/
 create table TShopkeeperInfo
 (
-   ID                   integer not null,
+   ID                   integer not null AUTO_INCREMENT,
    SHOP_ID              integer not null,
    NAME                 varchar(256),
    PASSWORD             varchar(256),
@@ -117,7 +117,7 @@ create index sk_id_index on TShopkeeperInfo
 /*==============================================================*/
 create table TWarehouse
 (
-   ID                   integer not null,
+   ID                   integer not null AUTO_INCREMENT,
    SHOP_ID              integer not null,
    GOODS_ID             integer not null,
    PURCHASE_PRICE       integer not null,
