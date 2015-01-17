@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import cn.springmvc.dao.ShopMapper;
 import cn.springmvc.model.Shop;
-import cn.springmvc.model.User;
 import cn.springmvc.service.ShopService;
 
 

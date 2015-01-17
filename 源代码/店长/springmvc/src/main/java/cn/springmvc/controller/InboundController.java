@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
-import cn.springmvc.model.DateTime_yym;
 import cn.springmvc.model.ServiceItem;
 import cn.springmvc.model.Shop;
-import cn.springmvc.model.User;
 import cn.springmvc.service.impl.ShopServiceImpl;
 
 @Controller
-public class MainController {
+public class InboundController {
 
 	@Autowired
 	ShopServiceImpl shopimp;
