@@ -9,6 +9,8 @@ public interface GoodsMapper {
 
     int insertSelective(Goods record);
 
+    Goods getByCode(String code);
+    
     Goods selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Goods record);
