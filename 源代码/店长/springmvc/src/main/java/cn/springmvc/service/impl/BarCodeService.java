@@ -18,9 +18,9 @@ public class BarCodeService {
 	GoodsMapper goodsDao;
 	
     public Goods getGoodsInfo(String code) throws HttpException, IOException{
-    	Goods info;
+    	Goods info = null;
     	
-    	info = goodsDao.getByCode(code);
+    	//info = goodsDao.getByCode(code);
     	
     	if(info == null){
     		PostMethod postMethod = new PostMethod("http://search.anccnet.com/searchResult2.aspx");
