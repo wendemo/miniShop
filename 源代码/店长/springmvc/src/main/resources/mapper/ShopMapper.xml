@@ -17,11 +17,11 @@
     from tshopinfo
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getShop" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
     from tshopinfo
-    where NAME = #{name,jdbcType=VARCHAR}
+    limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tshopinfo

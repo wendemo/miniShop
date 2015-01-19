@@ -17,8 +17,6 @@ import cn.springmvc.model.Goods;
 import cn.springmvc.model.ServiceItem;
 import cn.springmvc.model.Shop;
 import cn.springmvc.service.impl.BarCodeService;
-import cn.springmvc.service.impl.ShopServiceImpl;
-
 @Controller
 public class InboundController {
 

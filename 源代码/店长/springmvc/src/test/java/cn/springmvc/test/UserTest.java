@@ -16,13 +16,20 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.htmlparser.Node;
+import org.htmlparser.NodeFilter;
+import org.htmlparser.Parser;
+import org.htmlparser.filters.HasAttributeFilter;
+import org.htmlparser.filters.OrFilter;
+import org.htmlparser.tags.InputTag;
+import org.htmlparser.util.NodeList;
+import org.htmlparser.util.ParserException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.springmvc.model.Shop;
-import cn.springmvc.service.ShopService;
 
 
 
@@ -51,20 +58,33 @@ public class UserTest {
 		try {
 			int statusCode = httpclient.executeMethod(getMethod);
 			if(statusCode == 200){
-				String body = getMethod.getResponseBodyAsString();				
-				Pattern wp = Pattern.compile("id=\"__VIEWSTATE.+value=\"(.+)\"");   
-			    Matcher m = wp.matcher(body);  
-			    if(m.find() && m.groupCount() > 0){
-			    	form1 = m.group(1);			    	
-			    }	
-			    
-			    wp = Pattern.compile("id=\"__EVENTVALIDATION.+value=\"(.+)\"");   
-			    m = wp.matcher(body);  
-			    if(m.find() && m.groupCount() > 0){
-			    	form2 = m.group(1);			    	
-			    }	
+				String body = getMethod.getResponseBodyAsString();		
+				try {
+					Parser parser = new Parser(body);
+					NodeFilter state = new HasAttributeFilter( "id", "__VIEWSTATE" );
+					NodeFilter event = new HasAttributeFilter( "id", "__EVENTVALIDATION" );
+					NodeFilter filter = new OrFilter( state, event );
+					NodeList nodes = parser.extractAllNodesThatMatch(filter);
+					if(nodes!=null) {
+		                for (int i = 0; i < nodes.size(); i++) {
+		                	InputTag textnode = (InputTag) nodes.elementAt(i);
+		                    
+		                	if(textnode.getAttribute("id").equals("__VIEWSTATE")){
+		                		form1 = textnode.getAttribute("value");
+		                	}
+		                	
+		                	if(textnode.getAttribute("id").equals("__EVENTVALIDATION")){
+		                		form2 = textnode.getAttribute("value");
+		                	}
+		                }
+		            }
+				} catch (ParserException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				System.out.print("Form1:" + form1 + " Form2:" + form2 + "\n");
 			}
-			//System.out.print(getMethod.getResponseBodyAsString());
 		} catch (HttpException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -77,7 +97,7 @@ public class UserTest {
 	@Test
 	public void getBarCode(){		
 		getForm();
-		NameValuePair state   = new NameValuePair("__VIEWSTATE", form1);
+		/*NameValuePair state   = new NameValuePair("__VIEWSTATE", form1);
 		NameValuePair event   = new NameValuePair("__EVENTVALIDATION", form2);
 		NameValuePair key     = new NameValuePair("keyword", "6953392510388");
 		NameValuePair btn     = new NameValuePair("gdsBtn", "商品搜索");
@@ -100,6 +120,6 @@ public class UserTest {
 		} catch (IOException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
