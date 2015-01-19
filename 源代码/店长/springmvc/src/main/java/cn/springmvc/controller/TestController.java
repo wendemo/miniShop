@@ -30,7 +30,7 @@ public class TestController {
 	@ResponseBody	
 	public String test(){
 		Message msg = new Message();
-		
+	
 		Goods info = null;
         try {
         	info = barCodeSvc.getGoodsInfo("6953392510388");

@@ -6,6 +6,7 @@ public enum MsgCode {
    
     private MsgCode(String code, String desc){
     	mCode = code;
+    	mDesc = desc;
     }
 
     public String getCode() {
