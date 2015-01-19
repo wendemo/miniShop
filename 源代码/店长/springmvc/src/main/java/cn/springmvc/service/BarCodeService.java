@@ -1,4 +1,4 @@
-package cn.springmvc.service.impl;
+package cn.springmvc.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
