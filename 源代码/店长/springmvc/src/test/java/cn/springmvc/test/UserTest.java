@@ -1,35 +1,23 @@
 package cn.springmvc.test;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Scanner;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
-import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.htmlparser.Node;
 import org.htmlparser.NodeFilter;
 import org.htmlparser.Parser;
 import org.htmlparser.filters.HasAttributeFilter;
 import org.htmlparser.filters.OrFilter;
+import org.htmlparser.filters.TagNameFilter;
+import org.htmlparser.tags.DefinitionListBullet;
 import org.htmlparser.tags.InputTag;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import cn.springmvc.model.Shop;
 
 
 
@@ -97,7 +85,7 @@ public class UserTest {
 	@Test
 	public void getBarCode(){		
 		getForm();
-		/*NameValuePair state   = new NameValuePair("__VIEWSTATE", form1);
+		NameValuePair state   = new NameValuePair("__VIEWSTATE", form1);
 		NameValuePair event   = new NameValuePair("__EVENTVALIDATION", form2);
 		NameValuePair key     = new NameValuePair("keyword", "6953392510388");
 		NameValuePair btn     = new NameValuePair("gdsBtn", "商品搜索");
@@ -112,6 +100,29 @@ public class UserTest {
 			
 			if(statusCode == 200){
 				String body = postMethod.getResponseBodyAsString();
+				Parser parser = new Parser(body);
+				NodeFilter dd = new TagNameFilter( "dd" );
+				
+				NodeList nodes = parser.extractAllNodesThatMatch(dd);
+				if(nodes!=null) {
+	                for (int i = 0; i < nodes.size(); i++) {
+	                	DefinitionListBullet divnode = (DefinitionListBullet) nodes.elementAt(i);
+                   
+	                	switch(i){
+	                	case 0:
+	                		System.out.print("商标:" + divnode.getChildrenHTML() + "\n");
+	                		break;
+	                	case 1:
+	                		String [] tmp = divnode.getChildrenHTML().split("[>|<]");
+	                		System.out.print("厂家:" + tmp[2] + "\n");
+	                		break;
+	                	case 3:
+	                		System.out.print("名称:" + divnode.getChildrenHTML() + "\n");
+	                		break;
+	                	}
+	    				
+	                }
+	            }
 			}
 			
 		} catch (HttpException e) {
@@ -120,6 +131,9 @@ public class UserTest {
 		} catch (IOException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		}*/
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
