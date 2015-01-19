@@ -7,6 +7,7 @@ create table TGoodsInfo
    NAME                 varchar(256) not null,
    CODE                 varchar(256) not null,
    COMPANY              varchar(256) not null,
+   TRADEMARK            varchar(256) not null,
    TYPE                 integer not null,
    CREATE_TIME          timestamp not null,
    MODIFY_TIME          timestamp not null,
