@@ -14,6 +14,12 @@
   <sql id="Base_Column_List" >
     ID, NAME, CODE, COMPANY, TRADEMARK, TYPE, CREATE_TIME, MODIFY_TIME
   </sql>
+  <select id="getByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tgoodsinfo
+    where CODE = #{code,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

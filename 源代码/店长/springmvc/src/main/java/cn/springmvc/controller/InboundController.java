@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpException;
+import org.htmlparser.util.ParserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,24 +21,7 @@ import cn.springmvc.service.impl.BarCodeService;
 @Controller
 public class InboundController {
 
-	@Autowired
-	BarCodeService barCodeSvc;
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	@ResponseBody	
-	public String test(){
-        try {
-			Goods info = barCodeSvc.getGoodsInfo("6953392510388");
-		} catch (HttpException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-        
-        return "123";
-	}
 
 	
 }
