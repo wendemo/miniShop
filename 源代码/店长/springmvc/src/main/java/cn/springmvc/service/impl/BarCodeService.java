@@ -1,6 +1,7 @@
 package cn.springmvc.service.impl;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
