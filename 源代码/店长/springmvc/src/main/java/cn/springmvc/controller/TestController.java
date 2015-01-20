@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.springmvc.common.Message;
 import cn.springmvc.common.MsgCode;
+import cn.springmvc.dao.GoodsMapper;
 import cn.springmvc.model.Goods;
 import cn.springmvc.service.BarCodeService;
 
@@ -23,6 +24,9 @@ public class TestController {
 	
 	@Autowired
 	BarCodeService barCodeSvc;
+	
+	@Autowired
+	GoodsMapper goodsDao;
 	
 	@RequestMapping(value = "/testGetGoods", method = RequestMethod.GET)
 	@ResponseBody	
@@ -62,5 +66,31 @@ public class TestController {
 		}
         
         return msg.toString();
+	}
+	
+	@RequestMapping(value = "/testInsertGoods", method = RequestMethod.GET)
+	@ResponseBody
+	String testInsert(){
+		
+		Goods info = new Goods();
+		
+		info.setCode("123");
+		info.setCompany("321");
+		info.setName("H");
+		info.setTrademark("o");
+		info.setType(0);
+		
+		int res = goodsDao.insert(info);
+		
+		System.out.print("id:" + info.getId());
+		
+		Message msg = new Message();
+		
+		msg.setCode(MsgCode.OK.getCode());
+    	msg.setDesc(MsgCode.OK.getDesc());
+    	msg.setContent("OK");
+    	
+    	
+		return msg.toString();
 	}
 }

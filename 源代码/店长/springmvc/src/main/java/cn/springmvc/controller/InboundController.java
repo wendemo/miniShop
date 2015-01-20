@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.springmvc.common.Message;
 import cn.springmvc.common.MsgCode;
 import cn.springmvc.model.Goods;
+import cn.springmvc.model.Warehouse;
 import cn.springmvc.service.BarCodeService;
+import cn.springmvc.service.InboundService;
 @Controller
 public class InboundController {
 
@@ -25,6 +27,9 @@ public class InboundController {
 	
 	@Autowired
 	BarCodeService barCodeSvc;
+	
+	@Autowired
+	InboundService inboundSvc;
 	
 	@RequestMapping(value = "/getGoodsFromCode", method = RequestMethod.GET)
 	@ResponseBody
@@ -79,6 +84,33 @@ public class InboundController {
     		                 @RequestParam(required=false) Integer goodId){
 		
 		Message msg = new Message();
+		
+		Goods info = new Goods();
+		
+		info.setCode(code);
+		info.setCompany(company);
+		info.setName(name);
+		info.setTrademark(trademark);
+		info.setType(type);
+		info.setId(goodId);
+		
+		Warehouse warehouse = new Warehouse();
+		
+		warehouse.setCount(count);
+		warehouse.setPrice(price);
+		warehouse.setPurchasePrice(purchasePrice);
+		
+		int res = inboundSvc.InboundProduct(info, warehouse);
+		
+		if(res != 0){
+			msg.setCode(MsgCode.EXCEPTION.getCode());
+        	msg.setDesc(MsgCode.EXCEPTION.getDesc());
+        	msg.setContent("更新数据失败!");
+		} else {
+			msg.setCode(MsgCode.OK.getCode());
+        	msg.setDesc(MsgCode.OK.getDesc());
+        	msg.setContent("更新数据成功!");
+		}
 		
 		// 
 		

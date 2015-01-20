@@ -30,7 +30,7 @@
       CREATE_TIME, MODIFY_TIME)
     values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
       #{purchasePrice,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="cn.springmvc.model.Warehouse" >
     insert into twarehouse
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.springmvc.model.Warehouse" >
+  <update id="updateByGoodsId" parameterType="cn.springmvc.model.Warehouse" >
     update twarehouse
     <set >
       <if test="shopId != null" >
@@ -103,16 +103,11 @@
         PRICE = #{price,jdbcType=INTEGER},
       </if>
       <if test="count != null" >
-        COUNT = #{count,jdbcType=INTEGER},
+        COUNT = COUNT + #{count,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null" >
-        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.springmvc.model.Warehouse" >
     update twarehouse

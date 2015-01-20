@@ -36,7 +36,7 @@
       CREATE_TIME, MODIFY_TIME)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{company,jdbcType=VARCHAR}, #{trademark,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="cn.springmvc.model.Goods" >
     insert into tgoodsinfo

@@ -11,7 +11,7 @@ public interface WarehouseMapper {
 
     Warehouse selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Warehouse record);
+    int updateByGoodsId(Warehouse record);
 
     int updateByPrimaryKey(Warehouse record);
 }

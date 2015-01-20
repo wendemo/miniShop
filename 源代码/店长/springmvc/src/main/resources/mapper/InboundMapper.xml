@@ -28,7 +28,7 @@
       COUNT, CREATE_TIME, MODIFY_TIME, 
       OPERATOR_ID)
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
-      #{count,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{count,jdbcType=INTEGER}, now(), now(), 
       #{operatorId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.springmvc.model.Inbound" >
