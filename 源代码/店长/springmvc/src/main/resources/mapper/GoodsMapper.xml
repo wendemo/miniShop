@@ -30,7 +30,7 @@
     delete from tgoodsinfo
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.springmvc.model.Goods" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cn.springmvc.model.Goods" >
     insert into tgoodsinfo (ID, NAME, CODE, 
       COMPANY, TRADEMARK, TYPE, 
       CREATE_TIME, MODIFY_TIME)

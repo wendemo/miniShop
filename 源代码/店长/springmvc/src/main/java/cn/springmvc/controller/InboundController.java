@@ -73,7 +73,10 @@ public class InboundController {
     		                 @RequestParam String company,
     		                 @RequestParam String trademark,
     		                 @RequestParam Integer type,
-    		                 @RequestParam(required=false) Integer id){
+    		                 @RequestParam Integer count,
+    		                 @RequestParam Integer purchasePrice,
+    		                 @RequestParam Integer price,
+    		                 @RequestParam(required=false) Integer goodId){
 		
 		Message msg = new Message();
 		
