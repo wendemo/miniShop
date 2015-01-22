@@ -10,6 +10,8 @@ public interface WarehouseMapper {
     int insertSelective(Warehouse record);
 
     Warehouse selectByPrimaryKey(Integer id);
+    
+    Warehouse getWarehouseFromCode(String code);
 
     int updateByGoodsId(Warehouse record);
 

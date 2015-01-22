@@ -20,6 +20,12 @@
     from twarehouse
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getWarehouseFromCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from twarehouse t1, tgoodsinfo t2
+    where t1.GOODS_ID == t2.ID and t2.code = #{code,jdbcType=VARCHAR}
+  </select>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from twarehouse
     where ID = #{id,jdbcType=INTEGER}

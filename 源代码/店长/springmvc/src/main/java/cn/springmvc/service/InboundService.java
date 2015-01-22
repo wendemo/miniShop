@@ -56,7 +56,7 @@ public class InboundService {
 		
 		record.setCount(warehouse.getCount());
 		record.setGoodsId(info.getId());
-		record.setOperatorId(0);
+		record.setOperatorId(1);
 		record.setPrice(warehouse.getPurchasePrice());
 		
 		inboundDao.insert(record);
