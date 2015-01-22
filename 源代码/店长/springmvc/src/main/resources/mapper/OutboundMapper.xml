@@ -31,6 +31,8 @@
       #{count,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
       #{operatorId,jdbcType=INTEGER})
   </insert>
+  <insert id="insertAll" parameterType="java.util.List"> 
+  </insert>
   <insert id="insertSelective" parameterType="cn.springmvc.model.Outbound" >
     insert into toutboundrecord
     <trim prefix="(" suffix=")" suffixOverrides="," >

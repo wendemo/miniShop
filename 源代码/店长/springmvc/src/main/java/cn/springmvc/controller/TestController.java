@@ -28,9 +28,21 @@ public class TestController {
 	@Autowired
 	GoodsMapper goodsDao;
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@ResponseBody	
+	public Message test(){
+		Message msg = new Message();
+		
+		msg.setCode(MsgCode.OK.getCode());
+    	msg.setDesc(MsgCode.OK.getDesc());
+    	msg.setContent("成功");
+		
+		return msg;
+	}
+	
 	@RequestMapping(value = "/testGetGoods", method = RequestMethod.GET)
 	@ResponseBody	
-	public String test(){
+	public Message testGetGoods(){
 		Message msg = new Message();
 	
 		Goods info = null;
@@ -65,12 +77,12 @@ public class TestController {
         	msg.setContent(e.getMessage());
 		}
         
-        return msg.toString();
+        return msg;
 	}
 	
 	@RequestMapping(value = "/testInsertGoods", method = RequestMethod.GET)
 	@ResponseBody
-	String testInsert(){
+	Message testInsert(){
 		
 		Goods info = new Goods();
 		
@@ -91,6 +103,6 @@ public class TestController {
     	msg.setContent("OK");
     	
     	
-		return msg.toString();
+		return msg;
 	}
 }

@@ -33,7 +33,7 @@ public class InboundController {
 	
 	@RequestMapping(value = "/getGoodsFromCode", method = RequestMethod.GET)
 	@ResponseBody
-	String getGoodsFromCode(@RequestParam String code){
+	Message getGoodsFromCode(@RequestParam String code){
 		Message msg = new Message();
 		
 		Goods info = null;
@@ -68,12 +68,12 @@ public class InboundController {
         	msg.setContent(e.getMessage());
 		}
         
-        return msg.toString();
+        return msg;
 	}
 	
 	@RequestMapping(value = "/putInProduct", method = RequestMethod.POST)
 	@ResponseBody
-    String postInProduct(@RequestParam String code,
+	Message postInProduct(@RequestParam String code,
     		                 @RequestParam String name,
     		                 @RequestParam String company,
     		                 @RequestParam String trademark,
@@ -114,6 +114,6 @@ public class InboundController {
 		
 		// 
 		
-		return msg.toString();
+		return msg;
 	}
 }

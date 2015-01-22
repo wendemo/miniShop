@@ -1,5 +1,7 @@
 package cn.springmvc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.springmvc.common.Message;
 import cn.springmvc.common.MsgCode;
+import cn.springmvc.model.Outbound;
 import cn.springmvc.model.Warehouse;
 import cn.springmvc.service.OutboundService;
 
@@ -21,7 +24,7 @@ public class OutboundController {
 	
 	@RequestMapping(value = "/getWarehouseFromCode", method = RequestMethod.GET)
 	@ResponseBody
-	String getWasehouseFromCode(@RequestParam String code){
+	Message getWasehouseFromCode(@RequestParam String code){
 		Message msg = new Message();
 		
 		Warehouse warehouse = outboundSvc.getWarehouseFromCode(code);
@@ -36,13 +39,17 @@ public class OutboundController {
 			msg.setContent(warehouse);			
 		}
 		
-		return msg.toString();
+		return msg;
 	}
 	
 	
-	@RequestMapping(value = "/getWarehouseFromCode", method = RequestMethod.GET)
+	@RequestMapping(value = "/postOutProduct", method = RequestMethod.POST)
 	@ResponseBody
-	String postOutProduct(@RequestBody String goodsList){
-		return "";
+	Message postOutProduct(@RequestBody List<Outbound> goodsList){
+		Message msg = new Message();
+		
+		
+		
+		return msg;
 	}
 }
