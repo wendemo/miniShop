@@ -1,11 +1,16 @@
 package cn.springmvc.dao;
 
+import java.util.List;
+
 import cn.springmvc.model.Goods;
+import cn.springmvc.model.GoodsInbound;
 
 public interface GoodsMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Goods record);
+    
+    int insertAll(List<GoodsInbound> record);
 
     int insertSelective(Goods record);
 

@@ -21,3 +21,7 @@ drop table if exists TShopkeeperInfo;
 drop index wh_id_index on TWarehouse;
 
 drop table if exists TWarehouse;
+
+drop index gparam_id_index on TGoodsParam;
+
+drop table if exists TGoodsParam;

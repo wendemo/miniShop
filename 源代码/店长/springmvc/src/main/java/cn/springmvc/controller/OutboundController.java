@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.springmvc.common.Message;
 import cn.springmvc.common.MsgCode;
+import cn.springmvc.model.Goods;
+import cn.springmvc.model.GoodsInbound;
 import cn.springmvc.model.Outbound;
 import cn.springmvc.model.Warehouse;
 import cn.springmvc.service.OutboundService;
@@ -27,28 +31,55 @@ public class OutboundController {
 	Message getWasehouseFromCode(@RequestParam String code){
 		Message msg = new Message();
 		
-		Warehouse warehouse = outboundSvc.getWarehouseFromCode(code);
-		
-		if(warehouse == null){
+		try {
+			Warehouse warehouse = outboundSvc.getWarehouseFromCode(code);
+			
+			if(warehouse == null){
+				msg.setCode(MsgCode.EXCEPTION.getCode());
+				msg.setDesc(MsgCode.EXCEPTION.getDesc());
+				msg.setContent("Failed");
+			} else {
+				msg.setCode(MsgCode.OK.getCode());
+				msg.setDesc(MsgCode.OK.getDesc());
+				msg.setContent(warehouse);			
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 			msg.setCode(MsgCode.EXCEPTION.getCode());
 			msg.setDesc(MsgCode.EXCEPTION.getDesc());
-			msg.setContent("Failed");
-		} else {
-			msg.setCode(MsgCode.OK.getCode());
-			msg.setDesc(MsgCode.OK.getDesc());
-			msg.setContent(warehouse);			
+			msg.setContent(e.getMessage());
 		}
 		
 		return msg;
 	}
 	
 	
-	@RequestMapping(value = "/postOutProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/putOutProduct", method = RequestMethod.POST)
 	@ResponseBody
-	Message postOutProduct(@RequestBody List<Outbound> goodsList){
+	Message postOutProduct(@RequestParam String outGoods){
 		Message msg = new Message();
 		
-		
+		try {
+			List<Outbound> infos = JSON.parseArray(outGoods, Outbound.class);
+			
+			List<Goods> res = outboundSvc.saveOutbound(infos);
+
+			if(res.size() == 0){
+				msg.setCode(MsgCode.EXCEPTION.getCode());
+	        	msg.setDesc(MsgCode.EXCEPTION.getDesc());
+	        	msg.setContent("更新数据失败!");
+			} else {
+				msg.setCode(MsgCode.OK.getCode());
+	        	msg.setDesc(MsgCode.OK.getDesc());
+	        	msg.setContent("更新数据成功!");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			//mInboundLogger.error(e.getMessage());
+			msg.setCode(MsgCode.EXCEPTION.getCode());
+        	msg.setDesc(MsgCode.EXCEPTION.getDesc());
+        	msg.setContent(e.getMessage());
+		}
 		
 		return msg;
 	}

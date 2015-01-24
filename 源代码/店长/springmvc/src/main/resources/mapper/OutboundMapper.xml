@@ -32,6 +32,14 @@
       #{operatorId,jdbcType=INTEGER})
   </insert>
   <insert id="insertAll" parameterType="java.util.List"> 
+  <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+  insert into toutboundrecord ( GOODS_ID, PRICE, 
+      COUNT, CREATE_TIME, MODIFY_TIME, 
+      OPERATOR_ID)
+    values (#{item.goodsId,jdbcType=INTEGER}, #{item.price,jdbcType=INTEGER}, 
+      #{item.count,jdbcType=INTEGER}, now(), now(), 
+      #{item.operatorId,jdbcType=INTEGER})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="cn.springmvc.model.Outbound" >
     insert into toutboundrecord

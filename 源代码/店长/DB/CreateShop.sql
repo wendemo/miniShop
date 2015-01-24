@@ -1,30 +1,22 @@
-﻿/*==============================================================*/
-/* Table: TGoodsInfo                                            */
-/*==============================================================*/
 create table TGoodsInfo
 (
    ID                   integer not null AUTO_INCREMENT,
    NAME                 varchar(256) not null,
-   CODE                 varchar(256) not null,
+   CODE                 varchar(20) not null,
    COMPANY              varchar(256) not null,
    TRADEMARK            varchar(256) not null,
    TYPE                 integer not null,
    CREATE_TIME          timestamp not null,
    MODIFY_TIME          timestamp not null,
-   primary key (ID)
+   primary key (ID),
+   CONSTRAINT uk_CODE unique(CODE)
 );
 
-/*==============================================================*/
-/* Index: goods_id_index                                        */
-/*==============================================================*/
 create index goods_id_index on TGoodsInfo
 (
    ID
 );
 
-/*==============================================================*/
-/* Table: TInboundRecord                                        */
-/*==============================================================*/
 create table TInboundRecord
 (
    ID                   integer not null AUTO_INCREMENT,
@@ -37,17 +29,11 @@ create table TInboundRecord
    primary key (ID)
 );
 
-/*==============================================================*/
-/* Index: in_id_index                                           */
-/*==============================================================*/
 create index in_id_index on TInboundRecord
 (
    ID
 );
 
-/*==============================================================*/
-/* Table: TOutboundRecord                                       */
-/*==============================================================*/
 create table TOutboundRecord
 (
    ID                   integer not null AUTO_INCREMENT,
@@ -60,17 +46,11 @@ create table TOutboundRecord
    primary key (ID)
 );
 
-/*==============================================================*/
-/* Index: out_id_index                                          */
-/*==============================================================*/
 create index out_id_index on TOutboundRecord
 (
    ID
 );
 
-/*==============================================================*/
-/* Table: TShopInfo                                             */
-/*==============================================================*/
 create table TShopInfo
 (
    ID                   integer not null AUTO_INCREMENT,
@@ -81,17 +61,11 @@ create table TShopInfo
    primary key (ID)
 );
 
-/*==============================================================*/
-/* Index: shop_id_index                                         */
-/*==============================================================*/
 create index shop_id_index on TShopInfo
 (
    ID
 );
 
-/*==============================================================*/
-/* Table: TShopkeeperInfo                                       */
-/*==============================================================*/
 create table TShopkeeperInfo
 (
    ID                   integer not null AUTO_INCREMENT,
@@ -105,17 +79,11 @@ create table TShopkeeperInfo
    primary key (ID)
 );
 
-/*==============================================================*/
-/* Index: sk_id_index                                           */
-/*==============================================================*/
 create index sk_id_index on TShopkeeperInfo
 (
    ID
 );
 
-/*==============================================================*/
-/* Table: TWarehouse                                            */
-/*==============================================================*/
 create table TWarehouse
 (
    ID                   integer not null AUTO_INCREMENT,
@@ -129,10 +97,24 @@ create table TWarehouse
    primary key (ID)
 );
 
-/*==============================================================*/
-/* Index: wh_id_index                                           */
-/*==============================================================*/
 create index wh_id_index on TWarehouse
+(
+   ID
+);
+
+create table TGoodsParam
+(
+   ID                   integer not null AUTO_INCREMENT,
+   GOODS_ID             integer not null,
+   LACK_THRESHOLD      integer not null,
+   BACKLOG_THRESHOLD    integer not null,
+   COUNT                integer not null,
+   CREATE_TIME          timestamp not null,
+   MODIFY_TIME          timestamp not null,
+   primary key (ID)
+);
+
+create index gparam_id_index on TGoodsParam
 (
    ID
 );

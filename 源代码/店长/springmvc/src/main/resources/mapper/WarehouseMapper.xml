@@ -23,13 +23,47 @@
   <select id="getWarehouseFromCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from twarehouse t1, tgoodsinfo t2
-    where t1.GOODS_ID == t2.ID and t2.code = #{code,jdbcType=VARCHAR}
+    from twarehouse
+    where GOODS_ID = (select id from tgoodsinfo where code = #{code,jdbcType=VARCHAR})
   </select>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from twarehouse
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <insert id="insertAll" parameterType="java.util.List">
+  <foreach collection="list" item="item" index="index" separator=";"> 
+  <if test="item.goodsId == null" >
+   insert into twarehouse (SHOP_ID, GOODS_ID, 
+      PURCHASE_PRICE, PRICE, COUNT, 
+      CREATE_TIME, MODIFY_TIME)
+    values ( #{item.shopId,jdbcType=INTEGER}, (select id from tgoodsinfo where code = #{item.code,jdbcType=VARCHAR}), 
+      #{item.purchasePrice,jdbcType=INTEGER}, #{item.price,jdbcType=INTEGER}, #{item.count,jdbcType=INTEGER}, 
+      now(), now())
+   </if>
+   <if test="item.goodsId != null" >
+    update twarehouse
+    <set>
+      <if test="item.shopId != null" >
+        SHOP_ID = #{item.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="item.goodsId != null" >
+        GOODS_ID = #{item.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="item.purchasePrice != null" >
+        PURCHASE_PRICE = #{item.purchasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="item.price != null" >
+        PRICE = #{item.price,jdbcType=INTEGER},
+      </if>
+      <if test="item.count != null" >
+        COUNT = COUNT + #{item.count,jdbcType=INTEGER},
+      </if>
+      MODIFY_TIME = now(),
+    </set>
+    where GOODS_ID = #{item.goodsId,jdbcType=INTEGER}
+   </if>
+  </foreach>
+  </insert>
   <insert id="insert" parameterType="cn.springmvc.model.Warehouse" >
     insert into twarehouse (ID, SHOP_ID, GOODS_ID, 
       PURCHASE_PRICE, PRICE, COUNT, 
@@ -125,5 +159,19 @@
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateAll" parameterType="java.util.List" >
+  <foreach collection="list" item="item" index="index" separator=";">
+  <if test="item.goodsId != null" >
+  update twarehouse
+    <set >
+      <if test="item.count != null" >
+        COUNT = COUNT - #{item.count,jdbcType=INTEGER},
+      </if>
+      MODIFY_TIME = now(),
+    </set>
+    where GOODS_ID = #{item.goodsId,jdbcType=INTEGER} and COUNT >= #{item.count,jdbcType=INTEGER}
+  </if>
+  </foreach>    
   </update>
 </mapper>

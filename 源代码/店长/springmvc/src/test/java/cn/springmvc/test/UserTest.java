@@ -1,6 +1,8 @@
 package cn.springmvc.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -18,6 +20,13 @@ import org.htmlparser.tags.InputTag;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.alibaba.fastjson.JSON;
+
+import cn.springmvc.model.GoodsInbound;
 
 
 
@@ -33,7 +42,28 @@ public class UserTest {
 	
 	@Test
 	public void testUrlEncoder(){
+        List<GoodsInbound> goods = new ArrayList<GoodsInbound>();
 		
+		Integer i = 0;
+		
+		for(i = 0; i< 2; i++){
+			GoodsInbound info = new GoodsInbound();
+			
+			info.setCode(String.valueOf(i + 1));
+			info.setCompany("mini");
+			info.setCount(1);
+			info.setName("Hello Kitty");
+			info.setPrice(1000);
+			info.setPurchasePrice(100);
+			info.setShopId(1);
+			info.setTrademark("22");
+			info.setType(1);
+			info.setOperatorId(1);
+			
+			goods.add(info);
+		}
+		
+		System.out.print(JSON.toJSON(goods));
 	}
 	
 	String form1 = "";
@@ -84,8 +114,8 @@ public class UserTest {
 	
 	@Test
 	public void getBarCode(){		
-		getForm();
-		NameValuePair state   = new NameValuePair("__VIEWSTATE", form1);
+		//getForm();
+		/*NameValuePair state   = new NameValuePair("__VIEWSTATE", form1);
 		NameValuePair event   = new NameValuePair("__EVENTVALIDATION", form2);
 		NameValuePair key     = new NameValuePair("keyword", "6953392510388");
 		NameValuePair btn     = new NameValuePair("gdsBtn", "商品搜索");
@@ -134,6 +164,6 @@ public class UserTest {
 		} catch (ParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

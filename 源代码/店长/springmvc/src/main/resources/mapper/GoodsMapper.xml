@@ -30,6 +30,37 @@
     delete from tgoodsinfo
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <insert id="insertAll" parameterType="java.util.List"> 
+  <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+    <if test="item.goodsId == null" >
+        insert into tgoodsinfo (NAME, `CODE`, COMPANY, TRADEMARK, TYPE, CREATE_TIME, MODIFY_TIME)values        
+        (#{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, 
+      #{item.company,jdbcType=VARCHAR}, #{item.trademark,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER}, now(), now())
+    </if>
+    <if test="item.goodsId != null" >
+    update tgoodsinfo
+     <set >
+      <if test="item.name != null" >
+        NAME = #{item.name,jdbcType=VARCHAR},
+      </if>
+      <if test="item.code != null" >
+        CODE = #{item.code,jdbcType=VARCHAR},
+      </if>
+      <if test="item.company != null" >
+        COMPANY = #{item.company,jdbcType=VARCHAR},
+      </if>
+      <if test="item.trademark != null" >
+        TRADEMARK = #{item.trademark,jdbcType=VARCHAR},
+      </if>
+      <if test="item.type != null" >
+        TYPE = #{item.type,jdbcType=INTEGER},
+      </if>     
+        MODIFY_TIME = now()
+    </set>
+      where ID=#{item.goodsId,jdbcType=INTEGER}
+    </if>
+    </foreach>
+  </insert>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cn.springmvc.model.Goods" >
     insert into tgoodsinfo (ID, NAME, CODE, 
       COMPANY, TRADEMARK, TYPE, 
