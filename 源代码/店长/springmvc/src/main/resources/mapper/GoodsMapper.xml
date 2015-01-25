@@ -20,6 +20,13 @@
     from tgoodsinfo
     where CODE = #{code,jdbcType=VARCHAR}
   </select>
+  <select id="getLackGoods" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tgoodsinfo t1 ,(select t2.goods_id from twarehouse t2,  tgoodsparam t3 
+    <![CDATA[where t2.goods_id = t3.goods_id and t2.count <= t3.lack_threshold ]]> ) t4 
+    where t4.goods_id = t1.id
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

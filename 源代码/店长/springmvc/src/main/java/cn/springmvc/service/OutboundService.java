@@ -27,12 +27,10 @@ public class OutboundService {
 		return warehouse;
 	}
 	
-	public List<Goods> saveOutbound(List<Outbound> goodsList) {
-		List<Goods> lackGoods = new ArrayList<Goods>();
-		
+	public int saveOutbound(List<Outbound> goodsList) {		
 		warehouseDao.updateAll(goodsList);
 		outboundDao.insertAll(goodsList);
 		
-		return lackGoods;
+		return 0;
 	}
 }

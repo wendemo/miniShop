@@ -4,8 +4,10 @@ import json
 import httpwrap
 
 def insertInbound():
-    params = {'inGoods':'[{"code":"1","company":"mini","count":1,"name":"Hello Kitty","operatorId":1,"price":1000,"purchasePrice":100,"shopId":1,"trademark":"22","type":1}, \
-                        {"code":"2","company":"mini","count":1,"name":"Hello Kitty","operatorId":1,"price":1000,"purchasePrice":100,"shopId":1,"trademark":"22","type":1}]'};
+    params = {'inGoods':'[{"backlogThreshold":5,"code":"1","company":"mini","count":1,"lackThreshold":5, \
+                        "name":"Hello Kitty","operatorId":1,"price":1000,"purchasePrice":100,"shopId":1,"trademark":"22","type":1}, \
+                        {"backlogThreshold":5,"code":"2","company":"mini","count":1,"lackThreshold":5,\
+                        "name":"Hello Kitty","operatorId":1,"price":1000,"purchasePrice":100,"shopId":1,"trademark":"22","type":1}]'};
     httpwrap.httpPost("localhost:8080", "/springmvc/putInProduct", params);
 
 def updateInbound():
@@ -18,6 +20,8 @@ def updateInbound():
         'company':resp["content"]["company"],
         "type": resp["content"]["type"],
         "trademark":resp["content"]["trademark"],
+        "backlogThreshold":6,
+        "lackThreshold":7,
         "count":1,
         "operatorId":1,
         "price":1000,

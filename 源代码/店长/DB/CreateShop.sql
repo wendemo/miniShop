@@ -106,9 +106,8 @@ create table TGoodsParam
 (
    ID                   integer not null AUTO_INCREMENT,
    GOODS_ID             integer not null,
-   LACK_THRESHOLD      integer not null,
+   LACK_THRESHOLD       integer not null,
    BACKLOG_THRESHOLD    integer not null,
-   COUNT                integer not null,
    CREATE_TIME          timestamp not null,
    MODIFY_TIME          timestamp not null,
    primary key (ID)

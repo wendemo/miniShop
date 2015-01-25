@@ -1,8 +1,13 @@
 package cn.springmvc.dao;
 
+import java.util.List;
+
+import cn.springmvc.model.GoodsInbound;
 import cn.springmvc.model.GoodsParam;
 
 public interface GoodsParamMapper {
+	int insertAll(List<GoodsInbound> record);
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(GoodsParam record);

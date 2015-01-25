@@ -22,6 +22,10 @@ public class GoodsInbound {
     private Integer count;
     
     private Integer operatorId;
+    
+    private Integer lackThreshold;
+    
+    private Integer backlogThreshold;
 
 	public Integer getGoodsId() {
 		return goodsId;
@@ -109,5 +113,21 @@ public class GoodsInbound {
 
 	public void setOperatorId(Integer operatorId) {
 		this.operatorId = operatorId;
+	}
+
+	public Integer getLackThreshold() {
+		return lackThreshold;
+	}
+
+	public void setLackThreshold(Integer lackThreshold) {
+		this.lackThreshold = lackThreshold;
+	}
+
+	public Integer getBacklogThreshold() {
+		return backlogThreshold;
+	}
+
+	public void setBacklogThreshold(Integer backlogThreshold) {
+		this.backlogThreshold = backlogThreshold;
 	}
 }

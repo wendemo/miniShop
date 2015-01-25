@@ -59,6 +59,8 @@ public class UserTest {
 			info.setTrademark("22");
 			info.setType(1);
 			info.setOperatorId(1);
+			info.setBacklogThreshold(5);
+			info.setLackThreshold(5);
 			
 			goods.add(info);
 		}

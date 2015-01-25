@@ -11,8 +11,6 @@ public class GoodsParam {
 
     private Integer backlogThreshold;
 
-    private Integer count;
-
     private Date createTime;
 
     private Date modifyTime;
@@ -47,14 +45,6 @@ public class GoodsParam {
 
     public void setBacklogThreshold(Integer backlogThreshold) {
         this.backlogThreshold = backlogThreshold;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
     }
 
     public Date getCreateTime() {

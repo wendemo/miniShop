@@ -18,4 +18,8 @@ def outboundGoods():
 
     httpwrap.httpPost("localhost:8080", "/springmvc/putOutProduct", {'outGoods':[goods]});
 
-outboundGoods()
+def getLackProduct():
+    res = httpwrap.httpGet("localhost:8080", "/springmvc/getLackProduct")
+    print res
+
+getLackProduct()

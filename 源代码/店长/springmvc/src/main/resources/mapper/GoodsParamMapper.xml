@@ -6,12 +6,11 @@
     <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
     <result column="LACK_THRESHOLD" property="lackThreshold" jdbcType="INTEGER" />
     <result column="BACKLOG_THRESHOLD" property="backlogThreshold" jdbcType="INTEGER" />
-    <result column="COUNT" property="count" jdbcType="INTEGER" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, GOODS_ID, LACK_THRESHOLD, BACKLOG_THRESHOLD, COUNT, CREATE_TIME, MODIFY_TIME
+    ID, GOODS_ID, LACK_THRESHOLD, BACKLOG_THRESHOLD, CREATE_TIME, MODIFY_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,13 +22,38 @@
     delete from tgoodsparam
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <insert id="insertAll" parameterType="java.util.List"> 
+  <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+    <if test="item.goodsId == null" >
+        insert into tgoodsparam (GOODS_ID, LACK_THRESHOLD, 
+      BACKLOG_THRESHOLD, CREATE_TIME, MODIFY_TIME
+      )
+    values ((select id from tgoodsinfo where code = #{item.code,jdbcType=VARCHAR}), #{item.lackThreshold,jdbcType=INTEGER}, 
+      #{item.backlogThreshold,jdbcType=INTEGER}, now(), now()
+      )
+      </if>
+      <if test="item.goodsId != null" >
+	    update tgoodsparam
+	    <set >
+	      <if test="item.lackThreshold != null" >
+	        LACK_THRESHOLD = #{item.lackThreshold,jdbcType=INTEGER},
+	      </if>
+	      <if test="item.backlogThreshold != null" >
+	        BACKLOG_THRESHOLD = #{item.backlogThreshold,jdbcType=INTEGER},
+	      </if>
+	        MODIFY_TIME = now(),
+	    </set>
+	    where GOODS_ID = #{item.goodsId,jdbcType=INTEGER}
+    </if>
+    </foreach>
+  </insert>
   <insert id="insert" parameterType="cn.springmvc.model.GoodsParam" >
     insert into tgoodsparam (ID, GOODS_ID, LACK_THRESHOLD, 
-      BACKLOG_THRESHOLD, COUNT, CREATE_TIME, 
-      MODIFY_TIME)
+      BACKLOG_THRESHOLD, CREATE_TIME, MODIFY_TIME
+      )
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{lackThreshold,jdbcType=INTEGER}, 
-      #{backlogThreshold,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP})
+      #{backlogThreshold,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.springmvc.model.GoodsParam" >
     insert into tgoodsparam
@@ -45,9 +69,6 @@
       </if>
       <if test="backlogThreshold != null" >
         BACKLOG_THRESHOLD,
-      </if>
-      <if test="count != null" >
-        COUNT,
       </if>
       <if test="createTime != null" >
         CREATE_TIME,
@@ -69,9 +90,6 @@
       <if test="backlogThreshold != null" >
         #{backlogThreshold,jdbcType=INTEGER},
       </if>
-      <if test="count != null" >
-        #{count,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -92,9 +110,6 @@
       <if test="backlogThreshold != null" >
         BACKLOG_THRESHOLD = #{backlogThreshold,jdbcType=INTEGER},
       </if>
-      <if test="count != null" >
-        COUNT = #{count,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -109,7 +124,6 @@
     set GOODS_ID = #{goodsId,jdbcType=INTEGER},
       LACK_THRESHOLD = #{lackThreshold,jdbcType=INTEGER},
       BACKLOG_THRESHOLD = #{backlogThreshold,jdbcType=INTEGER},
-      COUNT = #{count,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}

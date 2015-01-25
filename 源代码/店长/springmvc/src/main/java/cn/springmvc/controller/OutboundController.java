@@ -19,12 +19,16 @@ import cn.springmvc.model.GoodsInbound;
 import cn.springmvc.model.Outbound;
 import cn.springmvc.model.Warehouse;
 import cn.springmvc.service.OutboundService;
+import cn.springmvc.service.WarehouseAlarm;
 
 @Controller
 public class OutboundController {
 
 	@Autowired
 	OutboundService outboundSvc;
+	
+	@Autowired
+	WarehouseAlarm warehouseAlarm;
 	
 	@RequestMapping(value = "/getWarehouseFromCode", method = RequestMethod.GET)
 	@ResponseBody
@@ -53,6 +57,25 @@ public class OutboundController {
 		return msg;
 	}
 	
+	@RequestMapping(value = "/getLackProduct", method = RequestMethod.GET)
+	@ResponseBody
+	Message getLackProduct(){
+		Message msg = new Message();
+		
+		try {
+			List<Goods> info = warehouseAlarm.getLackGoods();
+			msg.setCode(MsgCode.OK.getCode());
+        	msg.setDesc(MsgCode.OK.getDesc());
+        	msg.setContent(info);
+		} catch (Exception e) {
+			// TODO: handle exception
+			msg.setCode(MsgCode.EXCEPTION.getCode());
+        	msg.setDesc(MsgCode.EXCEPTION.getDesc());
+        	msg.setContent(e.getMessage());
+		}
+		
+		return msg;
+	}
 	
 	@RequestMapping(value = "/putOutProduct", method = RequestMethod.POST)
 	@ResponseBody
@@ -62,13 +85,14 @@ public class OutboundController {
 		try {
 			List<Outbound> infos = JSON.parseArray(outGoods, Outbound.class);
 			
-			List<Goods> res = outboundSvc.saveOutbound(infos);
+			int res = outboundSvc.saveOutbound(infos);
 
-			if(res.size() == 0){
+			if(res != 0){
 				msg.setCode(MsgCode.EXCEPTION.getCode());
 	        	msg.setDesc(MsgCode.EXCEPTION.getDesc());
 	        	msg.setContent("更新数据失败!");
 			} else {
+				
 				msg.setCode(MsgCode.OK.getCode());
 	        	msg.setDesc(MsgCode.OK.getDesc());
 	        	msg.setContent("更新数据成功!");
