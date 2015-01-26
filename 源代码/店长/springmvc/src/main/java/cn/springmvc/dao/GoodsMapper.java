@@ -7,8 +7,6 @@ import cn.springmvc.model.GoodsInbound;
 
 public interface GoodsMapper {
 	int insertAll(List<GoodsInbound> record);
-
-	List<Goods> getLackGoods();
 	
     int deleteByPrimaryKey(Integer id);
 

@@ -18,8 +18,9 @@ import cn.springmvc.model.Goods;
 import cn.springmvc.model.GoodsInbound;
 import cn.springmvc.model.Outbound;
 import cn.springmvc.model.Warehouse;
+import cn.springmvc.model.WarehouseAlarm;
 import cn.springmvc.service.OutboundService;
-import cn.springmvc.service.WarehouseAlarm;
+import cn.springmvc.service.WarehouseAlarmService;
 
 @Controller
 public class OutboundController {
@@ -28,7 +29,7 @@ public class OutboundController {
 	OutboundService outboundSvc;
 	
 	@Autowired
-	WarehouseAlarm warehouseAlarm;
+	WarehouseAlarmService warehouseAlarmSvc;
 	
 	@RequestMapping(value = "/getWarehouseFromCode", method = RequestMethod.GET)
 	@ResponseBody
@@ -63,7 +64,7 @@ public class OutboundController {
 		Message msg = new Message();
 		
 		try {
-			List<Goods> info = warehouseAlarm.getLackGoods();
+			List<WarehouseAlarm> info = warehouseAlarmSvc.getLackGoods();
 			msg.setCode(MsgCode.OK.getCode());
         	msg.setDesc(MsgCode.OK.getDesc());
         	msg.setContent(info);

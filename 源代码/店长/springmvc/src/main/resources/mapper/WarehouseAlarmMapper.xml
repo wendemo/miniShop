@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.springmvc.dao.WarehouseAlarmMapper" >
+  <resultMap id="BaseResultMap" type="cn.springmvc.model.WarehouseAlarm" >
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+    <result column="COUNT" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="getLackGoods" resultMap="BaseResultMap">
+    select 
+    t1.code, t1.name, t1.company, t1.type, t2.count
+    from tgoodsinfo t1, twarehouse t2,  tgoodsparam t3 
+    <![CDATA[where t2.goods_id = t3.goods_id and t2.count <= t3.lack_threshold  and t2.goods_id = t1.id]]> 
+  </select>
+</mapper>
