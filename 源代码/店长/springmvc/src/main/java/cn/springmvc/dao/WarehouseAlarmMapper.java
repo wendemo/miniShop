@@ -6,4 +6,5 @@ import cn.springmvc.model.WarehouseAlarm;
 
 public interface WarehouseAlarmMapper {
 	List<WarehouseAlarm> getLackGoods();
+	List<WarehouseAlarm> getBacklogGoods();
 }

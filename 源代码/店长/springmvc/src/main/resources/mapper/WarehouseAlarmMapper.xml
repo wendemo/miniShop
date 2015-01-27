@@ -7,11 +7,17 @@
     <result column="COMPANY" property="company" jdbcType="VARCHAR" />
     <result column="TYPE" property="type" jdbcType="INTEGER" />
     <result column="COUNT" property="count" jdbcType="INTEGER" />
+    <result column="THRESHOLD" property="threshold" jdbcType="INTEGER" />
   </resultMap>
   <select id="getLackGoods" resultMap="BaseResultMap">
     select 
-    t1.code, t1.name, t1.company, t1.type, t2.count
+    t1.code, t1.name, t1.company, t1.type, t2.count, t3.lack_threshold as 'threshold'
     from tgoodsinfo t1, twarehouse t2,  tgoodsparam t3 
     <![CDATA[where t2.goods_id = t3.goods_id and t2.count <= t3.lack_threshold  and t2.goods_id = t1.id]]> 
+  </select>
+  <select id="getBacklogGoods" resultMap="BaseResultMap">
+    select t1.code, t1.name, t1.company, t1.type, t2.count, t3.backlog_threshold as 'threshold' 
+       from tgoodsinfo t1, twarehouse t2,  tgoodsparam t3 
+       where <![CDATA[t2.goods_id = t3.goods_id and t2.goods_id = t1.id and DATE_ADD(t2.modify_time, INTERVAL (t3.backlog_threshold * 86400) SECOND) <= now()]]>;
   </select>
 </mapper>

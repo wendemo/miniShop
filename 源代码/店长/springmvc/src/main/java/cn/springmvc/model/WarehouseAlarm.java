@@ -10,6 +10,8 @@ public class WarehouseAlarm {
     private Integer type;
     
     private Integer count;
+    
+    private Integer threshold;
 
 	public String getCode() {
 		return code;
@@ -49,5 +51,13 @@ public class WarehouseAlarm {
 
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+
+	public Integer getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(Integer threshold) {
+		this.threshold = threshold;
 	}
 }

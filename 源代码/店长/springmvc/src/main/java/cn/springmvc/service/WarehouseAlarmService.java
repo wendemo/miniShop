@@ -18,4 +18,8 @@ public class WarehouseAlarmService {
 		return alarmDao.getLackGoods();
 	}
 	
+	public List<WarehouseAlarm> getBacklogGoods(){
+		return alarmDao.getBacklogGoods();
+	}
+	
 }
