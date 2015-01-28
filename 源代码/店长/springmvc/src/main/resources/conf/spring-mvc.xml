@@ -24,8 +24,13 @@
 		</property>
 	</bean>
 	
+	<mvc:annotation-driven />
+	
    <!-- 对模型视图添加前后缀 -->
      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
       p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+      
+     <mvc:resources mapping="js/**" location="/WEB-INF/js/**" />
+     <mvc:resources mapping="css/**" location="/WEB-INF/css/**" />
 
 </beans>
