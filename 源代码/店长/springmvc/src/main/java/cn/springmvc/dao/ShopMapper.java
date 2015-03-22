@@ -3,6 +3,8 @@ package cn.springmvc.dao;
 import cn.springmvc.model.Shop;
 
 public interface ShopMapper {
+	Shop select();
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Shop record);
