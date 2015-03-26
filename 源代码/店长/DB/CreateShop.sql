@@ -91,6 +91,7 @@ create table TWarehouse
    GOODS_ID             integer not null,
    PURCHASE_PRICE       integer not null,
    PRICE                integer not null,
+   PERIOD               integer not null,
    COUNT                integer not null,
    CREATE_TIME          timestamp not null,
    MODIFY_TIME          timestamp not null,

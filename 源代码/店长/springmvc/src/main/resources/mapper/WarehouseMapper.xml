@@ -7,12 +7,13 @@
     <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
     <result column="PURCHASE_PRICE" property="purchasePrice" jdbcType="INTEGER" />
     <result column="PRICE" property="price" jdbcType="INTEGER" />
+    <result column="PERIOD" property="period" jdbcType="INTEGER" />
     <result column="COUNT" property="count" jdbcType="INTEGER" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, SHOP_ID, GOODS_ID, PURCHASE_PRICE, PRICE, COUNT, CREATE_TIME, MODIFY_TIME
+    ID, SHOP_ID, GOODS_ID, PURCHASE_PRICE, PRICE, PERIOD, COUNT, CREATE_TIME, MODIFY_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,7 +35,7 @@
   <foreach collection="list" item="item" index="index" separator=";"> 
   <if test="item.goodsId == null" >
    insert into twarehouse (SHOP_ID, GOODS_ID, 
-      PURCHASE_PRICE, PRICE, COUNT, 
+      PURCHASE_PRICE, PRICE, PERIOD, COUNT, 
       CREATE_TIME, MODIFY_TIME)
     values ( #{item.shopId,jdbcType=INTEGER}, (select id from tgoodsinfo where code = #{item.code,jdbcType=VARCHAR}), 
       #{item.purchasePrice,jdbcType=INTEGER}, #{item.price,jdbcType=INTEGER}, #{item.count,jdbcType=INTEGER}, 
@@ -54,6 +55,9 @@
       </if>
       <if test="item.price != null" >
         PRICE = #{item.price,jdbcType=INTEGER},
+      </if>
+      <if test="item.period != null" >
+        PERIOD = #{item.period,jdbcType=INTEGER},
       </if>
       <if test="item.count != null" >
         COUNT = COUNT + #{item.count,jdbcType=INTEGER},

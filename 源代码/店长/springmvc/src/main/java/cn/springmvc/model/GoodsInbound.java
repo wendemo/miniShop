@@ -18,6 +18,8 @@ public class GoodsInbound {
     private Integer purchasePrice;
 
     private Integer price;
+    
+    private Integer period;
 
     private Integer count;
     
@@ -129,5 +131,13 @@ public class GoodsInbound {
 
 	public void setBacklogThreshold(Integer backlogThreshold) {
 		this.backlogThreshold = backlogThreshold;
+	}
+
+	public Integer getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(Integer period) {
+		this.period = period;
 	}
 }

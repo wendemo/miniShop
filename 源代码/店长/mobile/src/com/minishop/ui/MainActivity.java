@@ -1,11 +1,8 @@
 package com.minishop.ui;
 
 import com.minishop.R;
-import com.minishop.R.layout;
-import com.minishop.R.menu;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
 import com.minishop.utils.*;
