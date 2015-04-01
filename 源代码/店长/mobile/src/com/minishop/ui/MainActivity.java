@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
 	
 	@OnClick(R.id.scanImg)
 	public void onClickScanImg(View view){
-		Intent in = new Intent(this, ProductActivity.class);
+		Intent in = new Intent(this, ScanActivity.class);
         startActivityForResult(in, SCAN_IMG);
 	}
 

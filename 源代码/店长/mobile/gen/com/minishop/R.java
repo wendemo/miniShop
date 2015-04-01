@@ -48,53 +48,58 @@ public final class R {
     }
     public static final class drawable {
         public static final int add=0x7f020000;
-        public static final int bar_text_selector=0x7f020001;
-        public static final int commit=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int line=0x7f020004;
-        public static final int scan=0x7f020005;
-        public static final int tmp=0x7f020006;
+        public static final int back=0x7f020001;
+        public static final int bar_text_selector=0x7f020002;
+        public static final int commit=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int light=0x7f020005;
+        public static final int line=0x7f020006;
+        public static final int scan=0x7f020007;
+        public static final int tmp=0x7f020008;
     }
     public static final class id {
-        public static final int addImg=0x7f06001a;
+        public static final int addImg=0x7f06001b;
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f060000;
+        public static final int backImg=0x7f060014;
         public static final int bottomBar=0x7f06000c;
-        public static final int commitInImg=0x7f060018;
-        public static final int commitOutImg=0x7f060013;
+        public static final int cameraPreview=0x7f060017;
+        public static final int commitImg=0x7f060015;
+        public static final int commitInImg=0x7f060019;
+        public static final int commitOutImg=0x7f06001e;
         public static final int decode=0x7f060001;
         public static final int decode_failed=0x7f060002;
         public static final int decode_succeeded=0x7f060003;
         public static final int encode_failed=0x7f060004;
         public static final int encode_succeeded=0x7f060005;
         public static final int inboundBtn=0x7f06000f;
-        public static final int inboundList=0x7f06001b;
-        public static final int inboundTitle=0x7f060017;
+        public static final int inboundList=0x7f06001c;
+        public static final int inboundTitle=0x7f060018;
         public static final int launch_product_query=0x7f060006;
+        public static final int lightImg=0x7f060016;
         public static final int outboundBtn=0x7f06000e;
-        public static final int outboundList=0x7f06001e;
-        public static final int outboundTitle=0x7f06001c;
+        public static final int outboundList=0x7f060020;
+        public static final int outboundTitle=0x7f06001d;
         public static final int outbound_layout=0x7f06000d;
-        public static final int preview_view=0x7f060015;
         public static final int queryBtn=0x7f060011;
         public static final int quit=0x7f060007;
         public static final int restart_preview=0x7f060008;
         public static final int return_scan_result=0x7f060009;
-        public static final int scanImg=0x7f06001d;
+        public static final int scanImg=0x7f06001f;
         public static final int scanTitle=0x7f060012;
         public static final int search_book_contents_failed=0x7f06000a;
         public static final int search_book_contents_succeeded=0x7f06000b;
-        public static final int select_title=0x7f060014;
-        public static final int textView1=0x7f060019;
-        public static final int viewScan=0x7f060016;
+        public static final int select_title=0x7f060013;
+        public static final int textView1=0x7f06001a;
         public static final int warehouseBtn=0x7f060010;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_product=0x7f030001;
-        public static final int inbound=0x7f030002;
-        public static final int outbound=0x7f030003;
+        public static final int activity_scan=0x7f030002;
+        public static final int inbound=0x7f030003;
+        public static final int outbound=0x7f030004;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
