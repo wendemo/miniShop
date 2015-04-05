@@ -39,7 +39,8 @@
         </activity>
         <activity
             android:name="com.minishop.ui.ScanActivity"
-            android:label="@string/title_activity_product" >
+            android:label="@string/title_activity_product" 
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name="com.minishop.ui.ProductActivity"

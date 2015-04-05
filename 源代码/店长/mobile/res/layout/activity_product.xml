@@ -48,10 +48,196 @@
 
     </RelativeLayout>
 
-    <!-- TextView
-        android:id="@+id/codeText"
-        android:layout_width="wrap_content"
+    <RelativeLayout 
+        android:id="@+id/codeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" / -->
-
+        android:layout_below="@+id/scanTitle"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/codeLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="条码" />
+        <EditText
+            android:id="@+id/codeEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/codeLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/nameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/codeLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/nameLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="数量" />
+        <EditText
+            android:id="@+id/nameEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/nameLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/countLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/countLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="名称" />
+        <EditText
+            android:id="@+id/countEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/countLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/companyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/companyLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="公司" />
+        <EditText
+            android:id="@+id/companyEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/companyLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/trademarkLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/companyLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/trademarkLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="商标" />
+        <EditText
+            android:id="@+id/trademarkEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/trademarkLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/typeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trademarkLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/typeLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="类别" />
+        <EditText
+            android:id="@+id/typeEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/typeLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/purchaseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/typeLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/purchaseLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="进价" />
+        <EditText
+            android:id="@+id/purchaseEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/purchaseLabel">            
+        </EditText>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/pricekLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/purchaseLayout"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp">
+        <TextView
+	        android:id="@+id/priceLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"        
+	        android:textSize="17sp"
+	        android:layout_marginTop="10dp"
+	        android:text="售价" />
+        <EditText
+            android:id="@+id/priceEdit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/priceLabel">            
+        </EditText>
+    </RelativeLayout>
+    
 </RelativeLayout>
