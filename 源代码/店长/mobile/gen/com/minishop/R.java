@@ -99,7 +99,7 @@ public final class R {
         public static final int outbound_layout=0x7f06000d;
         public static final int priceEdit=0x7f06002d;
         public static final int priceLabel=0x7f06002c;
-        public static final int pricekLayout=0x7f06002b;
+        public static final int priceLayout=0x7f06002b;
         public static final int purchaseEdit=0x7f06002a;
         public static final int purchaseLabel=0x7f060029;
         public static final int purchaseLayout=0x7f060028;

@@ -7,6 +7,7 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.minishop.R;
 import com.minishop.utils.BaseActivity;
@@ -25,11 +26,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
 public class ScanActivity extends BaseActivity {
 	boolean mCheck = false;
+	
+	@ViewInject(R.id.inputCode)
+	EditText editText;
 
 	private static final float BEEP_VOLUME = 0.10f;
 	private static final long VIBRATE_DURATION = 200L;
@@ -43,6 +48,8 @@ public class ScanActivity extends BaseActivity {
 	private boolean lightStatus = false;
 
 	private ListView lv;
+	
+	int type = -1;
 
 	ImageScanner scanner;
 
@@ -56,6 +63,8 @@ public class ScanActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan);
+		
+		type = this.getIntent().getIntExtra("type", -1);
 
 		ViewUtils.inject(this);
 
@@ -186,6 +195,7 @@ public class ScanActivity extends BaseActivity {
 													ScanActivity.this,
 													ProductActivity.class);
 
+											intent.putExtra("type", type);
 											intent.putExtra("code", content);
 											startActivity(intent);
 
@@ -264,5 +274,18 @@ public class ScanActivity extends BaseActivity {
 			lightStatus = false;
 		}
 
+	}
+	
+	@OnClick(R.id.inputCodeBtn)
+	public void OnClickCode(View view){
+		Intent intent = new Intent(
+				ScanActivity.this,
+				ProductActivity.class);
+
+		intent.putExtra("type", type);
+		intent.putExtra("code", editText.getText().toString());
+		startActivity(intent);
+
+		finish();
 	}
 }
